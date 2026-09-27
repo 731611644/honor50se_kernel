@@ -1,0 +1,20 @@
+&antenna_board_match {
+	compatible = "huawei,antenna_board_match";
+	io-channels = <&auxadc 4>;
+	io-channel-names = "antenna_channel";
+	antenna_board_match_range = <1150 1250>;
+	status = "ok";
+};
+
+&antenna_boardid_detect {
+	compatible = "huawei,antenna_boardid_detect";
+	ant_gpio = <&pio 176 0>,
+	<&pio 175 0>,
+	<&pio 172 0>;
+	status = "disable";
+};
+
+&dev_detect {
+	compatible = "huawei,dev_detect";
+	status = "ok";
+};

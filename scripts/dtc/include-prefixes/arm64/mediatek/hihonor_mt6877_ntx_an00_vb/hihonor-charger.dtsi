@@ -1,0 +1,25 @@
+#include "../hihonor_charger/mt6877_ntx_honor_charger.dtsi"
+
+
+
+&i2c7 {
+	bq25970@65 {
+		status = "ok";
+	};
+	fairchild_fsa9685@25 {
+		status = "ok";
+	};
+	rt9426a_fg@55 {
+		status = "disabled";
+	};
+};
+
+&i2c0 {
+	bq25970@65 {
+		status = "ok";
+	};
+};
+
+&bat_gm30 {
+	status = "ok";
+};

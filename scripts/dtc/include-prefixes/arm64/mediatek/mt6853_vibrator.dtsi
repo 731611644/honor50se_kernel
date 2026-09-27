@@ -1,0 +1,5 @@
+&lk_hwvibrator {
+        compatible = "hw,lk_hwvibrator";
+        vibrator_type = < 4 >;
+        status = "okay";
+};

@@ -1,0 +1,20 @@
+#include "../hihonor_charger/mt6853_ang_hihonor_charger.dtsi"
+&i2c7 {
+	bq25970@65 {
+		status = "disabled";
+	};
+	bq25970@66 {
+		i2c_recovery_addr = <0x65>;
+		status = "ok";
+	};
+};
+
+&i2c0 {
+	bq25970@65 {
+		status = "disabled";
+	};
+	bq25970@66 {
+		i2c_recovery_addr = <0x65>;
+		status = "ok";
+	};
+};

@@ -1,0 +1,2 @@
+#include "../hihonor_audio/ang/hihonor_audio_ang.dtsi"
+#include "../hihonor_audio/ang/hihonor_mt6359_accdet.dtsi"

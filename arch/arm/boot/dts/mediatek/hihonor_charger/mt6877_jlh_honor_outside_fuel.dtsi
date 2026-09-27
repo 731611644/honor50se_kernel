@@ -1,0 +1,33 @@
+
+&huawei_battery {
+    use_third_coul = <1>;
+    status = "okay";
+};
+
+&huawei_power_proxy  {
+    status = "ok";
+};
+&huawei_power_supply {
+    status = "ok";
+};
+&battery_core {
+    status = "ok";
+};
+&battery_fault {
+    status = "ok";
+};
+&battery_model {
+    status = "ok";
+};
+&battery_ui_capacity {
+    status = "ok";
+};
+
+&bat_gm30 {
+	status = "disabled";
+};
+
+&soc_decimal {
+    ui_offset = <0>;
+};
+

@@ -1,0 +1,34 @@
+/dts-v1/;
+/plugin/;
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/spmi/spmi.h>
+#include <dt-bindings/pinctrl/mt6885-pinfunc.h>
+
+#include "mediatek/hihonor_mt6893_brt_w09_va/hihonor.dtsi"
+
+&rootparam {
+	mtk,boardid = <4 2 0 0>;
+	mtk,board_name = "BRT_W09_VA";
+	mtk,product_name = "BRT-W09";
+	hardware_version = "SH1BRTM";
+};
+
+&singleap_wifionly {
+	compatible = "singleap,wifionly";
+	status = "okay";
+	is_wifionly = "1";
+};
+
+&dev_detect {
+	usb_switch = <1>;
+	charge_switchcap = <1>;
+	status = "ok";
+};
+
+&antenna_boardid_detect {
+	expect_value = <2000>;
+};
+
+#include <k6893v1_64/cust.dtsi>
+/*End of this file, DO NOT ADD ANYTHING HERE*/

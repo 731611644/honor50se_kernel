@@ -1,0 +1,253 @@
+#include "mediatek/lcdkit3.0/brt/devkit_lcd_kit.dtsi"
+
+&huawei_lcd_panel {
+		compatible = "huawei,lcd_panel_type";
+		product_id = <1000>;
+		detect_type = <2>; /*0:DETECT_GPIOID  1:DETECT_CHIPID  2:DETECT_LCD_TYPE */
+		gpio_id = <77 73>; /*ID0 ID1*/
+		support_lcd_type = "LCD_KIT";
+		iovcc_lcd = <2 28>;
+};
+
+&reserved_memory {
+};
+
+
+/* chosen */
+&chosen {
+	atag,videolfb-fb_base_l = <0x7e605000>;
+	atag,videolfb-fb_base_h = <0x0>;
+	atag,videolfb-islcmfound = <1>;
+	atag,videolfb-islcm_inited = <0>;
+	atag,videolfb-fps= <6000>;
+	atag,videolfb-vramSize= <0x1be0000>;
+	atag,videolfb-lcmname=
+		"nt35595_fhd_dsi_cmd_truly_nt50358_drv";
+};
+
+&mipi_tx_config0 {
+    compatible = "mediatek,mipi_tx_config0",
+            "mediatek,mt6885-mipi-tx-cphy";
+    reg = <0 0x11e50000 0 0x1000>;
+    clocks = <&clk26m>;
+    #clock-cells = <0>;
+    #phy-cells = <0>;
+    clock-output-names = "mipi_tx0_pll";
+};
+
+&dsi0 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	panel@0 {
+		compatible = "kit_panel_common";
+		reg = <0>;
+		port {
+			panel_in: endpoint {
+				remote-endpoint = <&dsi_out>;
+			};
+		};
+	};
+	ports {
+		port@0 {
+			dsi_out: endpoint {
+				remote-endpoint = <&panel_in>;
+			};
+		};
+
+		port@1 {
+			reg = <1>;
+			master_out: endpoint {
+				remote-endpoint = <&slave_in>;
+			};
+		};
+	};
+};
+
+&dsi1 {
+	status = "okay";
+	compatible = "mediatek,dsi1",
+		"mediatek,mt6885-dsi";
+	reg = <0 0x1410e000 0 0x1000>;
+	mediatek,dual-dsi-slave;
+	phys = <&mipi_tx_config1>;
+	phy-names = "dphy";
+	ports {
+		port@1 {
+			reg = <1>;
+			slave_in: endpoint {
+				remote-endpoint = <&master_out>;
+			};
+		};
+	};
+};
+
+&mipi_tx_config1 {
+	status = "okay";
+	compatible = "mediatek,mipi_tx_config1",
+		     "mediatek,mt6885-mipi-tx-cphy";
+	reg = <0 0x11e60000 0 0x1000>;
+	clocks = <&clk26m>;
+	#clock-cells = <0>;
+	#phy-cells = <0>;
+	clock-output-names = "mipi_tx1_pll";
+};
+
+
+&pwmleds {
+	compatible = "mediatek,pwm-leds";
+
+	backlight {
+		label = "lcd-backlight";
+		pwms = <&disp_pwm 0 39385>;
+		led-bits = <13>;
+		trans-bits = <11>;
+		pwm-names = "lcd-backlight";
+		default-state = "on";
+	};
+};
+
+&i2c0{
+
+	ti,lp8556@2c{
+		compatible = "ti,lp8556";
+		lp8556_support = <1>;
+		reg = <0x2c>;
+		lp8556_i2c_bus_id = <0>;
+		lp8556_hw_enable = <1>;
+		lp8556_hw_en_gpio = <127>;
+		bl_on_lk_mdelay = <5>;
+		bl_on_kernel_mdelay = <5>;
+		bl_led_num = <5>;
+		lp8556_device_control = <0x85>;
+		lp8556_eprom_cfg0 = <0xaa>;
+		lp8556_eprom_cfg1 = <0xce>;
+		lp8556_eprom_cfg2 = <0x24>;
+		lp8556_eprom_cfg3 = <0x52>;
+		lp8556_eprom_cfg4 = <0x72>;
+		lp8556_eprom_cfg5 = <0x10>;
+		lp8556_eprom_cfg6 = <0x40>;
+		lp8556_eprom_cfg7 = <0xf7>;
+		lp8556_eprom_cfg9 = <0x80>;
+		lp8556_eprom_cfgA = <0x0f>;
+		lp8556_eprom_cfgE = <0x0e>;
+		lp8556_eprom_cfg9E = <0x22>;
+		lp8556_led_enable = <0x1f>;
+		lp8556_eprom_cfg98 = <0x00>;
+		lp8556_level_lsb = <0x10>;
+		lp8556_level_msb = <0x11>;
+	};
+
+	sy,sy7758@2e{
+		compatible = "sy,sy7758";
+		sy7758_support = <1>;
+		reg = <0x2e>;
+		sy7758_i2c_bus_id = <0>;
+		sy7758_hw_enable = <1>;
+		sy7758_hw_en_gpio = <127>;
+		bl_on_lk_mdelay = <5>;
+		bl_on_kernel_mdelay = <5>;
+		bl_led_num = <5>;
+		sy7758_device_control = <0x84>;
+		sy7758_eprom_cfg0 = <0xaa>;
+		sy7758_eprom_cfg1 = <0xce>;
+		sy7758_eprom_cfg2 = <0x24>;
+		sy7758_eprom_cfg3 = <0x52>;
+		sy7758_eprom_cfg4 = <0x72>;
+		sy7758_eprom_cfg5 = <0x10>;
+		sy7758_eprom_cfg6 = <0x40>;
+		sy7758_eprom_cfg7 = <0xf7>;
+		sy7758_eprom_cfg9 = <0x80>;
+		sy7758_eprom_cfgA = <0x0f>;
+		sy7758_eprom_cfgE = <0x0e>;
+		sy7758_eprom_cfg9E = <0x22>;
+		sy7758_led_enable = <0x1f>;
+		sy7758_eprom_cfg98 = <0x00>;
+		sy7758_level_lsb = <0x10>;
+		sy7758_level_msb = <0x11>;
+	};
+
+	realtek,rt8555@31{
+		compatible = "realtek,rt8555";
+		rt8555_support = <1>;
+		reg = <0x31>;
+		rt8555_i2c_bus_id = <0>;
+		rt8555_hw_enable = <1>;
+		rt8555_hw_en_gpio = <127>;
+		bl_on_lk_mdelay = <5>;
+		bl_on_kernel_mdelay = <5>;
+		bl_led_num = <5>;
+		bl_set_long_slope = <0x70>;
+		rt8555_control_mode = <0xC3>;
+		rt8555_current_protection = <0xD6>;
+		rt8555_current_setting = <0xA8>;
+		rt8555_voltage_setting = <0x00>;
+		rt8555_brightness_setting = <0x10>;
+		rt8555_time_control = <0x7F>;
+		rt8555_mode_devision = <0x04>;
+		rt8555_compensation_duty  = <0x00>;
+		rt8555_clk_pfm_enable  = <0x00>;
+		rt8555_led_protection = <0x00>;
+		rt8555_level_lsb = <0x04>;
+		rt8555_level_msb = <0x05>;
+	};
+
+	mp,mp3314@28{
+		compatible = "mp,mp3314";
+		mp3314_support = <1>;
+		reg = <0x28>;
+		mp3314_i2c_bus_id = <0>;
+		mp3314_hw_enable = <1>;
+		mp3314_hw_en_gpio = <127>;
+		bl_on_lk_mdelay = <5>;
+		bl_on_kernel_mdelay = <5>;
+		bl_led_num = <5>;
+		mp3314_eprom_cfg02 = <0x9d>;
+		mp3314_eprom_cfg03 = <0x5f>;
+		mp3314_eprom_cfg04 = <0xb0>;
+		mp3314_eprom_cfg05 = <0x08>;
+		mp3314_eprom_cfg06 = <0xff>;
+		mp3314_eprom_cfg07 = <0x3f>;
+		mp3314_eprom_cfg08 = <0xa6>;
+		mp3314_eprom_cfg09 = <0x02>;
+		mp3314_eprom_cfg0A = <0xa0>;
+		mp3314_eprom_cfg0C = <0xff>;
+		mp3314_eprom_cfg0D = <0xff>;
+		mp3314_eprom_cfg10 = <0xd0>;
+		mp3314_level_lsb = <0x06>;
+		mp3314_level_msb = <0x07>;
+	};
+
+	rt,rt4539@3c{
+		compatible = "rt,rt4539";
+		rt4539_support = <1>;
+		reg = <0x3c>;
+		rt4539_i2c_bus_id = <0>;
+		rt4539_hw_enable = <1>;
+		rt4539_hw_en_gpio = <127>;
+		bl_on_lk_mdelay = <5>;
+		bl_on_kernel_mdelay = <5>;
+		bl_led_num = <5>;
+		rt4539_eprom_cfg00 = <0x6a>;
+		rt4539_eprom_cfg01 = <0x17>;
+		rt4539_eprom_cfg02 = <0x9b>;
+		rt4539_eprom_cfg03 = <0x04>;
+		rt4539_eprom_cfg06 = <0xb0>;
+		rt4539_eprom_cfg07 = <0x01>;
+		rt4539_eprom_cfg08 = <0x01>;
+		rt4539_eprom_cfg09 = <0x78>;
+		rt4539_eprom_cfg0A = <0x16>;
+		rt4539_eprom_cfg0B = <0xbe>;
+		rt4539_level_lsb = <0x05>;
+		rt4539_level_msb = <0x04>;
+	};
+
+	tps65132@3e {
+		compatible = "ti,tps65132";
+		reg = <0x3e>;
+		tps65132_i2c_bus_id = <0>;
+		tps65132_support = <1>;
+		ocp2138_support = <1>;
+		status = "ok";
+	};
+};

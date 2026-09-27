@@ -1,0 +1,5 @@
+#include "../hihonor_charger/mt6877_jlh_honor_charger.dtsi"
+
+&huawei_batt_info {
+	shield_ct_sign = <1>;
+};

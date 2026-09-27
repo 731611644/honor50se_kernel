@@ -1,0 +1,12 @@
+#include "../hihonor_charger/mt6877_jlh_honor_charger.dtsi"
+#include "../hihonor_charger/mt6877_jlh_honor_outside_fuel.dtsi"
+
+&i2c7 {
+	rt9426_battery@55 {
+		status = "ok";
+	};
+};
+
+&huawei_batt_info {
+	shield_ct_sign = <1>;
+};

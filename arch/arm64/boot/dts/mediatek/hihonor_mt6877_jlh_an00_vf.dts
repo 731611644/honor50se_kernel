@@ -1,0 +1,28 @@
+/dts-v1/;
+/plugin/;
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#ifndef CONFIG_FPGA_EARLY_PORTING
+#include <dt-bindings/pinctrl/mt6877-pinfunc.h>
+#endif
+#include "mediatek/hihonor_mt6877_jlh_an00_vf/hihonor.dtsi"
+
+&rootparam {
+	mtk,boardid = <4 0 0 7>;
+	mtk,board_name = "JLH_AN00_VF";
+	mtk,product_name = "JLH-AN00";
+	hardware_version = "HN1JULAM";
+};
+
+&antenna_board_match {
+	antenna_board_match_range = <550 650>;
+};
+
+#include <honor_mt6877_jlh/cust.dtsi>
+
+/* i2c freq for ti fuel */
+&i2c7 {
+    clock-frequency = <100000>;
+};
+
+/*End of this file, DO NOT ADD ANYTHING HERE*/

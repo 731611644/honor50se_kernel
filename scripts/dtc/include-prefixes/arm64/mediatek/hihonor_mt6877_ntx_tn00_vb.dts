@@ -1,0 +1,23 @@
+/dts-v1/;
+/plugin/;
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#ifndef CONFIG_FPGA_EARLY_PORTING
+#include <dt-bindings/pinctrl/mt6877-pinfunc.h>
+#endif
+#include "mediatek/hihonor_mt6877_ntx_tn00_vb/hihonor.dtsi"
+
+&rootparam {
+	mtk,boardid = <4 2 0 7>;
+	mtk,board_name = "NTX_TN00_VB";
+	mtk,product_name = "NTX-TN00";
+	hardware_version = "HN5NTNM";
+};
+
+&antenna_board_match {
+	antenna_board_match_range = <720 825>;
+};
+
+#include <k6877v1_64/cust.dtsi>
+
+/*End of this file, DO NOT ADD ANYTHING HERE*/

@@ -1,0 +1,118 @@
+&huawei_sensor_info {
+        compatible = "huawei,huawei_sensor_info";
+        product_number = <14>;
+        status = "okay";
+        lsm6dsm_direction = <0>;
+        bmi2xy_direction = <3>;
+        icm4n607_direction = <0>;
+        gyro_calibrate_timeout = <5000>;
+};
+&i2c3 {
+        sar@20 {
+                status = "okay";
+                compatible = "abov,abov_sar";
+                reg = <0x20>;
+                phone_type = <0x1>; /* 1:BRT */
+                sar_int = <&pio 63 0x00>;
+                cap_vdd-supply = <&mt_pmic_vcn18_ldo_reg>;
+                reg_array_len = <0x01>;
+                reg_array_val = <0x09 0x01>;
+                sensor_type = <155>;
+                label = "AbovCapSense";
+        };
+        Semtech_sx932x@28 {
+                status = "ok";
+                compatible = "Semtech,sx932x";
+                reg = <0x28>;
+                Semtech,nirq-gpio = <&pio 83 0x00>;
+                cap_vdd-supply = <&mt_pmic_vcn18_ldo_reg>;
+                sensor_type = <155>;
+                Semtech,reg-num = <46>; /* total registers number to initialize*/
+                Semtech,reg-init  = /bits/ 8 <
+                0x10 0x16
+                0x20 0x00
+                0x23 0x00
+                0x24 0x44
+                0x26 0x01
+                0x27 0x44
+                0x28 0x01 /*PH0 to CS0 input*/
+                0x29 0x10
+                0x2A 0x19 /*PH2 CS2-input,CS1-dync,CS0-HZ*/
+                0x2B 0x00
+                0x2C 0x12
+                0x2D 0x08
+                0x30 0x09
+                0x31 0x09
+                0x32 0x08
+                0x33 0x20
+                0x34 0x0C
+                0x35 0x00
+                0x36 0x04
+                0x37 0x1B
+                0x40 0x00
+                0x41 0x00
+                0x42 0x00
+                0x43 0x00
+                0x44 0x00
+                0x45 0x05
+                0x46 0x00
+                0x47 0x00
+                0x48 0x00
+                0x49 0x80
+                0x4A 0x00
+                0x4B 0x00
+                0x4C 0x00
+                0x4D 0x00
+                0x4E 0x80
+                0x4F 0x0C
+                0x50 0x00
+                0x51 0x70
+                0x52 0x20
+                0x53 0xE1
+                0x54 0xF0
+                0x05 0x77
+                0x06 0x00
+                0x07 0x00
+                0x08 0x00
+                0x11 0x27>;
+        };
+};
+
+&ak8789_hall {
+        compatible = "honor,hall_sensor,ak8789";
+        status = "ok";
+        honor,hall_0{
+                honor,single-n-pole = <&pio 7 0x00>;
+                honor,id = <0>;
+                honor,type = <0x01>;
+                honor,wakeup-flag = <0x4000>; // IRQF_NO_SUSPEND
+                honor,hw-wakeup-support = <0x03>;
+                honor,default-state = "on";
+                honor,x-coordinate = <0>;
+                honor,y-coordinate = <0>;
+                honor,int-delay-time = <100>;
+        };
+        honor,hall_1{
+                honor,single-n-pole = <&pio 11 0x00>;
+                honor,id = <1>;
+                honor,type = <0x01>;
+                honor,wakeup-flag = <0x4000>; // IRQF_NO_SUSPEND
+                honor,hw-wakeup-support = <0x03>;
+                honor,default-state = "on";
+                honor,x-coordinate = <0>;
+                honor,y-coordinate = <0>;
+                honor,int-delay-time = <100>;
+        };
+        honor,hall_2{
+                honor,single-n-pole = <&pio 69 0x00>;
+                honor,id = <2>;
+                honor,type = <0x01>;
+                honor,wakeup-flag = <0x4000>; // IRQF_NO_SUSPEND
+                honor,hw-wakeup-support = <0x03>;
+                honor,default-state = "on";
+                honor,x-coordinate = <0>;
+                honor,y-coordinate = <0>;
+                honor,int-delay-time = <100>;
+        };
+};
+

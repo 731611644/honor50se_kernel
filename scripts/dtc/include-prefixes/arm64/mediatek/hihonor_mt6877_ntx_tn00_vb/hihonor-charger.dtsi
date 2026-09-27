@@ -1,0 +1,48 @@
+#include "../hihonor_charger/mt6877_ntx_honor_charger.dtsi"
+#include "../hihonor_charger/mt6877_ntx_honor_outside_fuel.dtsi"
+
+&i2c7 {
+	bq25970@65 {
+		status = "ok";
+	};
+	fairchild_fsa9685@25 {
+		status = "disabled";
+	};
+	rt9426a_fg@55 {
+		status = "disabled";
+	};
+	cw2217_fg@64 {
+		status = "ok";
+	};
+};
+
+&i2c0 {
+	bq25970@65 {
+		status = "disabled";
+	};
+	sm5450@6F{
+		status = "ok";
+		support_unbalanced_current_sc = <1>;
+		use_typec_plugout_to_quick_exit = <1>;
+	};
+};
+
+&direct_charger_sc {
+	support_multi_ic = <1>;
+};
+
+&multi_btb_temp {
+	status = "ok";
+};
+
+
+&power_thermalzone {
+	sensors {
+		sensor2 {
+			sensor_name = "cw2217";
+			ops_name = "cw2217";
+			adc_channel = <0>;
+			ntc_index = <5>;
+		};
+	};
+};

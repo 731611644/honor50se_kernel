@@ -1,0 +1,31 @@
+#include "../hihonor_mt6885_camera_yorv4.dtsi"
+
+&mediatek_camera {
+	camera0 {
+		compatible = "huawei,camera0";
+		sensor-index  = "0";
+		power-setting-idx = <0>;
+		is_map_vaild = <0>;
+	};
+
+	camera1 {
+		compatible = "huawei,camera1";
+		sensor-index  = "1";
+		power-setting-idx = <0>;
+		is_map_vaild = <0>;
+	};
+
+	camera2 {
+		compatible = "huawei,camera2";
+		sensor-index  = "2";
+		power-setting-idx = <0>;
+		is_map_vaild = <1>;
+	};
+
+	camera3 {
+		compatible = "huawei,camera3";
+		sensor-index  = "4";
+		power-setting-idx = <0>;
+		is_map_vaild = <1>;
+	};
+};
